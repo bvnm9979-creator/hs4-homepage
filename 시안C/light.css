@@ -1,0 +1,14 @@
+/* C안: 흰 바탕 + 남색 글씨 + 공식 파랑 (#0632F5) */
+:root {
+  color-scheme: light;
+  --color-paper: oklch(99.2% 0.002 260); --color-paper-2: oklch(96.6% 0.008 264); --color-paper-3: oklch(93.4% 0.014 264);
+  --color-ink: oklch(23% 0.1 268); --color-ink-2: oklch(36% 0.07 266); --color-muted: oklch(50% 0.04 264);
+  --color-rule: oklch(88.5% 0.018 264);
+  --color-accent: oklch(47% 0.27 265); --color-accent-deep: oklch(41% 0.24 266); --color-accent-text: oklch(47% 0.27 265); --color-accent-ink: oklch(99% 0.003 260);
+  --color-focus: oklch(50% 0.25 265);
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.13 150);
+}
+/* 사진: 남색 그림자 + 흰 밝은 부분 (어두운 안과 같은 느낌) */
+[data-slot]:has(> img) { background: oklch(99% 0.003 260); }
+[data-slot]:has(> img)::before { background: oklch(30% 0.12 268); }
+::selection { background: oklch(47% 0.27 265); color: #fff; }
