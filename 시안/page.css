@@ -56,7 +56,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .hero { padding-block: var(--space-xl) var(--space-3xl); }
 .hero__grid { display: grid; grid-template-columns: minmax(0, 13fr) minmax(0, 11fr); gap: var(--space-2xl); align-items: stretch; }
 .hero__text { container-type: inline-size; min-width: 0; }
-.display { font-family: var(--font-outlier); font-weight: 400; letter-spacing: 0; font-size: min(21cqi, 176px); line-height: 1.04; max-width: none; animation: wipe var(--dur-long) var(--ease-out) both; }
+.display { font-family: var(--font-outlier); font-weight: 400; letter-spacing: 0; font-size: min(21cqi, 176px); line-height: 1.04; max-width: none; }
 .display > span { display: block; white-space: nowrap; }
 .display .hot { color: var(--color-accent-text); }
 .hero .lead { margin-top: var(--space-xl); padding-left: var(--space-lg); border-left: 3px solid var(--color-accent-text); font-size: clamp(1.25rem, 0.6vw + 1rem, 1.625rem); line-height: 1.5; letter-spacing: -0.01em; color: var(--color-ink-2); font-weight: 400; }
@@ -218,8 +218,30 @@ html:not(.js) .tabs { display: none; }
   .section__head { flex-direction: column; align-items: start; margin-bottom: var(--space-xl); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .display { animation: none; }
+  .display > span, .hero .lead { animation: ink-fade 500ms var(--ease-out) both !important; -webkit-mask-image: none; mask-image: none; }
+  .display .hot { animation-delay: 200ms !important; }
 }
+
+/* v13: 슬로건 — 붓이 지나가듯 한 줄씩 써지고, 이재명은 파란 빛이 번졌다 가라앉음, 이어서 세로선이 그어짐 */
+.display > span { width: fit-content;
+  -webkit-mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%); mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%);
+  -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  animation: brush 1000ms cubic-bezier(0.33, 0.9, 0.3, 1) both; }
+.display > span:nth-child(2) { animation-delay: 380ms; }
+.display .hot { padding: .3em .4em; margin: -.3em -.4em; animation: brush 1000ms cubic-bezier(0.33, 0.9, 0.3, 1) 780ms both, bloom 1600ms var(--ease-out) 1100ms both; }
+.hero .lead { animation: stroke-down 900ms var(--ease-out) 1700ms both; }
+@keyframes brush {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; filter: blur(6px); opacity: .4; }
+  60% { filter: blur(0); opacity: 1; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; filter: blur(0); opacity: 1; }
+}
+@keyframes bloom {
+  0% { text-shadow: 0 0 0 transparent; }
+  30% { text-shadow: 0 0 .18em oklch(70% 0.2 258 / .9), 0 0 .5em oklch(55% 0.27 262 / .6); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+@keyframes stroke-down { from { clip-path: inset(0 0 100% 0); opacity: 0; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes ink-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* v12: 휴대폰에서 오른쪽 잘림 고침 — 숨은 메뉴 자리 빼고, 로고를 화면 폭에 맞춤 */
 @media (max-width: 75rem) { .nav__in > nav { display: none; } .nav__menu summary { min-height: 44px; display: flex; align-items: center; } }
