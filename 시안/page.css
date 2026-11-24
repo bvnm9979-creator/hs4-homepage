@@ -3,8 +3,8 @@
  * axes: dark/display-condensed/warm · posture: committed · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R3 V4 · weakest: R, the leadership portraits are slots until the user supplies photos */
 /* waive 38iii: one blue word in the hero head, the theme's own move · waive 55b: hero lines are nowrap and sized in cqi · waive 68: leadership portraits are real people the user will supply, the slots are the brief · waive brand: red accent swapped for the organisation's own blue, the ground shifted to its navy */
-@import url("./tokens.css?v=11");
-@import url("./base.css?v=11");
+@import url("./tokens.css?v=12");
+@import url("./base.css?v=12");
 
 @font-face { font-family: "KimJwajin"; src: url("./fonts/kimjwajin.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Paperlogy"; src: url("./fonts/paperlogy-9Black.woff") format("woff"); font-weight: 900; font-display: swap; }
@@ -219,4 +219,12 @@ html:not(.js) .tabs { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .display { animation: none; }
+}
+
+/* v12: 휴대폰에서 오른쪽 잘림 고침 — 숨은 메뉴 자리 빼고, 로고를 화면 폭에 맞춤 */
+@media (max-width: 75rem) { .nav__in > nav { display: none; } .nav__menu summary { min-height: 44px; display: flex; align-items: center; } }
+@media (max-width: 40rem) {
+  .nav__in { gap: var(--space-sm); }
+  .nav__logo { flex: 0 1 auto; min-width: 0; }
+  .nav__logo img { height: 30px; max-width: 100%; }
 }
